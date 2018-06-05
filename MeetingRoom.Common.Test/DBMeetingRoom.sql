@@ -1,0 +1,30 @@
+﻿CREATE DATABASE DBMeetiingRoom;
+
+USE DBMeetiingRoom;
+
+CREATE TABLE [dbo].[TBEmployee]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Name] VARCHAR(50) NOT NULL,
+	[EmployeePosition] VARCHAR(50) NOT NULL,
+	[TelephoneExtension] VARCHAR(50) NOT NULL
+)
+
+CREATE TABLE [dbo].[TBRoom]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+	[Name] VARCHAR(50) NOT NULL,
+	[NumberOfSeats] VARCHAR(50) NOT NULL,
+	[Disponibility] BIT NOT NULL
+)
+
+CREATE TABLE [dbo].[TBScheduling]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+	[StartTime] DATETIME NOT NULL,
+	[EndTime] DATETIME NOT NULL,
+	[EmployeeId] INT NOT NULL,
+	[RoomId] INT NOT NULL,
+	CONSTRAINT [FK_TBScheduling_TBEmployee] FOREIGN KEY ([EmployeeId]) REFERENCES [dbo].[TBEmployee] ([Id]) ON DELETE CASCADE,
+	CONSTRAINT [FK_TBScheduling_TBRoom] FOREIGN KEY ([RoomId]) REFERENCES [dbo].[TBRoom] ([Id]) ON DELETE CASCADE
+)
